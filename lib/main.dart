@@ -1,6 +1,6 @@
-import 'package:filmsapp/pages/details_page.dart';
-import 'package:filmsapp/pages/home_page.dart';
 import 'package:flutter/material.dart';
+
+import 'package:filmsapp/pages/pages.dart';
 
 void main() => runApp(const MyApp());
 
