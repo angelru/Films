@@ -5,10 +5,9 @@ class MoiveSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
-      height: 250,
-      color: Colors.red,
+      height: 260,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -17,6 +16,7 @@ class MoiveSlider extends StatelessWidget {
             child: Text('Populares',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           ),
+          SizedBox(height: 5),
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -38,8 +38,33 @@ class _MoviePoster extends StatelessWidget {
     return Container(
       width: 130,
       height: 190,
-      color: Colors.green,
-      margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: () =>
+                Navigator.pushNamed(context, 'details', arguments: 'movie'),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(24),
+              child: FadeInImage(
+                  placeholder: AssetImage('assets/no-image.jpg'),
+                  image: NetworkImage('https://via.placeholder.com/300x400'),
+                  height: 190,
+                  width: 130,
+                  fit: BoxFit.cover),
+            ),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            'Cinema Paradiso la mejor película de los tiempos',
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+          )
+        ],
+      ),
     );
   }
 }
