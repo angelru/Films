@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: Column(
-        children: const [CardSwiperPage()],
+        children: const [CardSwiper(), MoiveSlider()],
       ),
     );
   }

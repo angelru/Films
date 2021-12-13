@@ -1,1 +1,2 @@
-export 'package:filmsapp/pages/card_swiper_page.dart';
+export 'package:filmsapp/widgets/card_swiper.dart';
+export 'package:filmsapp/widgets/movie_slider.dart';

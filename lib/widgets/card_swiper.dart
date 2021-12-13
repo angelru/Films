@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 
 import 'package:card_swiper/card_swiper.dart';
 
-class CardSwiperPage extends StatelessWidget {
-  const CardSwiperPage({Key? key}) : super(key: key);
+class CardSwiper extends StatelessWidget {
+  const CardSwiper({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: size.height * 0.5,
       child: Swiper(
