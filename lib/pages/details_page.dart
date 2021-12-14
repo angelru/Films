@@ -8,9 +8,15 @@ class DetailsPage extends StatelessWidget {
     final String movie =
         ModalRoute.of(context)?.settings.arguments.toString() ?? 'no-movie';
 
-    return const Scaffold(
+    return Scaffold(
       body: CustomScrollView(
-        slivers: [_CustomAppBar()],
+        slivers: [
+          const _CustomAppBar(),
+          SliverList(
+              delegate: SliverChildListDelegate([
+            const _PosterMovie(),
+          ]))
+        ],
       ),
     );
   }
@@ -39,6 +45,53 @@ class _CustomAppBar extends StatelessWidget {
             placeholder: AssetImage('assets/loading.gif'),
             image: NetworkImage('https://via.placeholder.com/500x300'),
             fit: BoxFit.cover),
+      ),
+    );
+  }
+}
+
+class _PosterMovie extends StatelessWidget {
+  const _PosterMovie({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
+    return Container(
+      margin: const EdgeInsets.only(top: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: const FadeInImage(
+              placeholder: AssetImage('assets/no-loading.gif'),
+              image: NetworkImage('https://via.placeholder.com/200x300'),
+              height: 150,
+            ),
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('movie.title',
+                  style: textTheme.headline5,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2),
+              Text('movie.originalTitle',
+                  style: textTheme.subtitle1, overflow: TextOverflow.ellipsis),
+              Row(
+                children: [
+                  const Icon(Icons.star_outline, size: 15, color: Colors.grey),
+                  const SizedBox(width: 5),
+                  Text('movie.voteAverage', style: textTheme.caption)
+                ],
+              )
+            ],
+          )
+        ],
       ),
     );
   }
