@@ -16,12 +16,11 @@ class HomePage extends StatelessWidget {
               icon: const Icon(Icons.search_outlined), onPressed: () => {}),
         ],
       ),
-      body: Column(
-        children: const [
-          CardSwiper(),
-          MoiveSlider(),
-        ],
-      ),
+      body: SingleChildScrollView(
+          child: Column(children: const [
+        CardSwiper(),
+        MoiveSlider(),
+      ])),
     );
   }
 }

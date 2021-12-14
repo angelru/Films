@@ -16,7 +16,7 @@ class MoiveSlider extends StatelessWidget {
             child: Text('Populares',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -46,7 +46,7 @@ class _MoviePoster extends StatelessWidget {
                 Navigator.pushNamed(context, 'details', arguments: 'movie'),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(24),
-              child: FadeInImage(
+              child: const FadeInImage(
                   placeholder: AssetImage('assets/no-image.jpg'),
                   image: NetworkImage('https://via.placeholder.com/300x400'),
                   height: 190,
@@ -54,10 +54,10 @@ class _MoviePoster extends StatelessWidget {
                   fit: BoxFit.cover),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
-          Text(
+          const Text(
             'Cinema Paradiso la mejor película de los tiempos',
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
