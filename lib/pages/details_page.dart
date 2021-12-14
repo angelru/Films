@@ -1,3 +1,4 @@
+import 'package:filmsapp/widgets/casting_cards.dart';
 import 'package:flutter/material.dart';
 
 class DetailsPage extends StatelessWidget {
@@ -15,6 +16,15 @@ class DetailsPage extends StatelessWidget {
           SliverList(
               delegate: SliverChildListDelegate([
             const _PosterMovie(),
+            const _OverView(),
+            const _OverView(),
+            const _OverView(),
+            const _OverView(),
+            const _OverView(),
+            const _OverView(),
+            const _OverView(),
+            const _OverView(),
+            const CastingCards()
           ]))
         ],
       ),
@@ -39,6 +49,7 @@ class _CustomAppBar extends StatelessWidget {
           width: double.infinity,
           alignment: Alignment.bottomCenter,
           color: Colors.black12,
+          padding: const EdgeInsets.only(bottom: 16),
           child: const Text('movie.title', style: TextStyle(fontSize: 16)),
         ),
         background: const FadeInImage(
@@ -93,6 +104,21 @@ class _PosterMovie extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class _OverView extends StatelessWidget {
+  const _OverView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      child: Text(
+          'Aliquip voluptate excepteur tempor enim. Ad qui eu et nulla pariatur non magna culpa.',
+          textAlign: TextAlign.justify,
+          style: Theme.of(context).textTheme.subtitle1),
     );
   }
 }
