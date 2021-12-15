@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import 'package:filmsapp/models/models.dart';
 import 'package:filmsapp/providers/movies_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,18 +16,17 @@ class CastingCards extends StatelessWidget {
       future: movieProvider.getCreditsMovie(movieId),
       builder: (_, AsyncSnapshot<List<Cast>> snapshot) {
         if (snapshot.hasData) {
+          final casts = snapshot.data!;
           return Container(
             margin: const EdgeInsets.only(bottom: 16),
             width: double.infinity,
             height: 180,
             child: ListView.builder(
-                itemCount: 10,
+                itemCount: casts.length,
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (_, index) => const _CastCard()),
+                itemBuilder: (_, index) => _CastCard(actor: casts[index])),
           );
         }
-
-        final casts = snapshot.data;
 
         return const SizedBox(
           height: 180,
@@ -41,7 +38,8 @@ class CastingCards extends StatelessWidget {
 }
 
 class _CastCard extends StatelessWidget {
-  const _CastCard({Key? key}) : super(key: key);
+  final Cast actor;
+  const _CastCard({Key? key, required this.actor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,15 +51,15 @@ class _CastCard extends StatelessWidget {
         children: [
           ClipRRect(
               borderRadius: BorderRadius.circular(24),
-              child: const FadeInImage(
-                  placeholder: AssetImage('assets/loading.gif'),
-                  image: NetworkImage('https://via.placeholder.com/150x300'),
+              child: FadeInImage(
+                  placeholder: const AssetImage('assets/loading.gif'),
+                  image: NetworkImage(actor.fullProfilePath),
                   height: 140,
                   width: 100,
                   fit: BoxFit.cover)),
           const SizedBox(height: 5),
-          const Text(
-            'Actor.name gdgdgdgdgd gd g d gd  gdgg',
+          Text(
+            actor.name,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
