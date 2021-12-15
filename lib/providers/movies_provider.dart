@@ -42,7 +42,11 @@ class MoviesProvider extends ChangeNotifier {
   }
 
   Future<List<Cast>> getCreditsMovie(int id) async {
-    print('Pidiendo info al servidor');
+    if (movieCast.containsKey(id)) {
+      return movieCast[id]!;
+    }
+
+    print('pidiendo información al servidor');
 
     final jsonData = await _getJsonData('3/movie/$id/credits', _popularPage);
     final creditResponse = CreditResponse.fromJson(jsonData);
