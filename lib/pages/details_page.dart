@@ -17,7 +17,7 @@ class DetailsPage extends StatelessWidget {
               delegate: SliverChildListDelegate([
             _PosterMovie(movie: movie),
             _OverView(movie: movie),
-            const CastingCards()
+            CastingCards(movieId: movie.id)
           ]))
         ],
       ),
@@ -85,23 +85,24 @@ class _PosterMovie extends StatelessWidget {
           ),
           Expanded(
               child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(movie.title,
-                  style: textTheme.headline5,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2),
-              Text(movie.originalTitle,
-                  style: textTheme.subtitle1, overflow: TextOverflow.ellipsis),
-              Row(
-                children: [
-                  const Icon(Icons.star_outline, size: 15, color: Colors.grey),
-                  const SizedBox(width: 5),
-                  Text(movie.voteAverage.toString(), style: textTheme.caption)
-                ],
-              )
-            ],
-          )),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                Text(movie.title,
+                    style: textTheme.headline5,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2),
+                Text(movie.originalTitle,
+                    style: textTheme.subtitle1,
+                    overflow: TextOverflow.ellipsis),
+                Row(
+                  children: [
+                    const Icon(Icons.star_outline,
+                        size: 15, color: Colors.grey),
+                    const SizedBox(width: 5),
+                    Text(movie.voteAverage.toString(), style: textTheme.caption)
+                  ],
+                )
+              ])),
         ],
       ),
     );

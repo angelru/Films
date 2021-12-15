@@ -25,7 +25,7 @@ class MoviesProvider extends ChangeNotifier {
     return response.body;
   }
 
-  getMovies() async {
+  void getMovies() async {
     final jsonData = await _getJsonData('3/movie/now_playing');
     final nowPlayingResponse = NowPlayingResponse.fromJson(jsonData);
     movies = nowPlayingResponse.results;
@@ -35,6 +35,13 @@ class MoviesProvider extends ChangeNotifier {
   void getPopularMovies() async {
     _popularPage++;
     final jsonData = await _getJsonData('3/movie/popular', _popularPage);
+    final popularResponse = PopularResponse.fromJson(jsonData);
+    popularMovies = [...popularMovies, ...popularResponse.results];
+    notifyListeners();
+  }
+
+  void getCreditsMovie(int id) async {
+    final jsonData = await _getJsonData('3/movie/$id/credits', _popularPage);
     final popularResponse = PopularResponse.fromJson(jsonData);
     popularMovies = [...popularMovies, ...popularResponse.results];
     notifyListeners();
