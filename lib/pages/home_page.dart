@@ -23,7 +23,11 @@ class HomePage extends StatelessWidget {
       body: SingleChildScrollView(
           child: Column(children: [
         CardSwiper(movies: movieProvider.movies),
-        MoiveSlider(movies: movieProvider.popularMovies, title: "Populares"),
+        MoiveSlider(
+          movies: movieProvider.popularMovies,
+          title: "Populares",
+          onNextPage: () => movieProvider.getPopularMovies(),
+        ),
       ])),
     );
   }
