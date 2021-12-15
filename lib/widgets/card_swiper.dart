@@ -1,5 +1,4 @@
 import 'package:filmsapp/models/models.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:card_swiper/card_swiper.dart';

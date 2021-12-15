@@ -1,7 +1,12 @@
+import 'package:filmsapp/models/models.dart';
 import 'package:flutter/material.dart';
 
 class MoiveSlider extends StatelessWidget {
-  const MoiveSlider({Key? key}) : super(key: key);
+  final String? title;
+  final List<Movie> movies;
+
+  const MoiveSlider({Key? key, required this.movies, this.title})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,18 +16,19 @@ class MoiveSlider extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Text('Populares',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-          ),
+          if (title != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(title!,
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold)),
+            ),
           const SizedBox(height: 5),
           Expanded(
             child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 20,
-              itemBuilder: (_, index) => const _MoviePoster(),
-            ),
+                scrollDirection: Axis.horizontal,
+                itemCount: movies.length,
+                itemBuilder: (_, index) => _MoviePoster(movie: movies[index])),
           )
         ],
       ),
@@ -31,7 +37,9 @@ class MoiveSlider extends StatelessWidget {
 }
 
 class _MoviePoster extends StatelessWidget {
-  const _MoviePoster({Key? key}) : super(key: key);
+  final Movie movie;
+
+  const _MoviePoster({Key? key, required this.movie}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +54,9 @@ class _MoviePoster extends StatelessWidget {
                 Navigator.pushNamed(context, 'details', arguments: 'movie'),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(24),
-              child: const FadeInImage(
-                  placeholder: AssetImage('assets/no-image.jpg'),
-                  image: NetworkImage('https://via.placeholder.com/300x400'),
+              child: FadeInImage(
+                  placeholder: const AssetImage('assets/no-image.jpg'),
+                  image: NetworkImage(movie.fullPathImage),
                   height: 190,
                   width: 130,
                   fit: BoxFit.cover),
@@ -57,8 +65,8 @@ class _MoviePoster extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          const Text(
-            'Cinema Paradiso la mejor película de los tiempos',
+          Text(
+            movie.title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
