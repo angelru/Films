@@ -1,3 +1,4 @@
+import 'package:filmsapp/models/search_movie_response.dart';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
@@ -19,7 +20,7 @@ class MoviesProvider extends ChangeNotifier {
   }
 
   Future<String> _getJsonData(String endPoint, [int page = 1]) async {
-    var url = Uri.https(_baseAddress, endPoint,
+    final url = Uri.https(_baseAddress, endPoint,
         {'api_key': _apiKey, 'language': _language, 'page': '$page'});
 
     final response = await http.get(url);
@@ -46,11 +47,18 @@ class MoviesProvider extends ChangeNotifier {
       return movieCast[id]!;
     }
 
-    print('pidiendo información al servidor');
-
     final jsonData = await _getJsonData('3/movie/$id/credits', _popularPage);
     final creditResponse = CreditResponse.fromJson(jsonData);
     movieCast[id] = creditResponse.cast;
     return creditResponse.cast;
+  }
+
+  Future<List<Movie>> searchMovie(String query) async {
+    final url = Uri.https(_baseAddress, '3/search/movie',
+        {'api_key': _apiKey, 'language': _language, 'query': query});
+
+    final response = await http.get(url);
+    final searchMovieResponse = SearchMovieResponse.fromJson(response.body);
+    return searchMovieResponse.results;
   }
 }

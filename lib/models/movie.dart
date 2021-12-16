@@ -49,6 +49,14 @@ class Movie {
     return 'https://image.tmdb.org/t/p/w500$backdropPath';
   }
 
+  get fullposterPath {
+    if (posterPath == null) {
+      return "https://i.imgur.com/WB7bHNq.jpeg";
+    }
+
+    return 'https://image.tmdb.org/t/p/w500$posterPath';
+  }
+
   factory Movie.fromJson(String str) => Movie.fromMap(json.decode(str));
 
   factory Movie.fromMap(Map<String, dynamic> json) => Movie(
